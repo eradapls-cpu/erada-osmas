@@ -1,0 +1,426 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>أوسماس | حجز تذاكر الدكتور</title>
+  <meta name="description" content="تطبيق أوسماس لحجز تذاكر الدكتور بواسطة مجموعة إرادة بلس">
+  <style>
+    :root{
+      --navy:#071629; --blue:#0b84d8; --blue2:#075985; --green:#10b981;
+      --gold:#d6a84f; --muted:#64748b; --line:#e2e8f0; --soft:#f8fafc;
+      --danger:#e11d48; --orange:#f59e0b;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;font-family:Tahoma,Arial,sans-serif;color:#0f172a;min-height:100vh;
+      background:radial-gradient(circle at 10% 10%,rgba(14,165,233,.18),transparent 28%),
+      radial-gradient(circle at 90% 20%,rgba(16,185,129,.14),transparent 25%),
+      linear-gradient(135deg,#eef7ff,#fff 55%,#ecfdf5);
+    }
+    .wrap{max-width:1220px;margin:auto;padding:18px}
+    .hero{
+      position:relative;overflow:hidden;background:linear-gradient(135deg,#071629,#0f2745 58%,#0b84d8);
+      color:#fff;border-radius:34px;padding:30px;box-shadow:0 24px 70px rgba(7,22,41,.22);
+      display:grid;grid-template-columns:1.05fr .95fr;gap:20px;align-items:center;
+    }
+    .hero:before{content:"";position:absolute;inset:auto -80px -120px auto;width:330px;height:330px;background:rgba(214,168,79,.18);border-radius:50%}
+    .hero:after{content:"";position:absolute;inset:-90px auto auto -90px;width:280px;height:280px;background:rgba(255,255,255,.08);border-radius:50%}
+    .hero>*{position:relative}.badge{display:inline-flex;gap:8px;align-items:center;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.1);padding:10px 15px;border-radius:999px;font-weight:800;font-size:14px;backdrop-filter:blur(8px)}
+    h1{font-size:58px;margin:14px 0 8px;font-weight:900;letter-spacing:-1px}.gold{color:var(--gold)}
+    .subtitle{font-size:17px;color:#cbd5e1;font-weight:700;margin:0}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+    .stat{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.14);border-radius:24px;padding:15px;text-align:center;backdrop-filter:blur(10px)}
+    .stat span{display:block;color:#cbd5e1;font-size:12px;font-weight:800}.stat b{display:block;font-size:30px;margin-top:5px}
+    .tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;max-width:620px;background:#fff;border-radius:25px;padding:8px;margin:20px 0;box-shadow:0 14px 30px rgba(14,165,233,.12)}
+    button,input,select,textarea{font-family:inherit}button{border:0;cursor:pointer}
+    .tabs button{border-radius:18px;background:transparent;color:#64748b;font-weight:900;padding:15px;font-size:15px}
+    .tabs .active.patient{background:var(--blue);color:#fff}.tabs .active.admin{background:var(--green);color:#fff}.tabs .active.settings{background:var(--navy);color:#fff}
+    .grid{display:grid;grid-template-columns:1.08fr .92fr;gap:20px}.card{background:rgba(255,255,255,.94);border:1px solid rgba(226,232,240,.75);border-radius:34px;padding:26px;box-shadow:0 22px 60px rgba(14,165,233,.12);backdrop-filter:blur(10px)}
+    .darkCard{background:linear-gradient(135deg,#071629,#12243b);color:#fff;border-color:rgba(255,255,255,.08)}
+    .sectionTitle{display:flex;align-items:center;gap:14px;margin-bottom:22px}.icon{width:54px;height:54px;border-radius:19px;display:flex;align-items:center;justify-content:center;background:#e0f2fe;color:var(--blue);font-size:26px}.darkCard .icon{background:rgba(255,255,255,.1);color:var(--gold)}
+    h2{margin:0;font-size:25px;font-weight:900}.sectionTitle p,.adminTop p{margin:5px 0 0;color:#64748b;font-size:14px;font-weight:700}.darkCard .sectionTitle p{color:#cbd5e1}
+    .form{display:grid;grid-template-columns:repeat(2,1fr);gap:15px}label{display:block;font-size:14px;font-weight:900;margin-bottom:8px;color:#334155}.hint{font-size:12px;color:#64748b;font-weight:800;margin-top:7px}
+    input,select,textarea{width:100%;border:1px solid var(--line);background:#f8fafc;border-radius:18px;padding:14px;min-height:50px;outline:none;font-size:14px;transition:.2s}
+    input:focus,select:focus,textarea:focus{border-color:#38bdf8;background:#fff;box-shadow:0 0 0 4px rgba(56,189,248,.13)}textarea{min-height:94px;resize:vertical}.full{grid-column:1/-1}
+    .mainBtn{min-height:56px;border-radius:18px;background:linear-gradient(135deg,var(--blue),var(--blue2));color:#fff;font-size:16px;font-weight:900;box-shadow:0 16px 28px rgba(14,132,216,.2)}
+    .mainBtn:disabled{background:#94a3b8;cursor:not-allowed;box-shadow:none}.danger{background:#fff1f2;color:var(--danger);padding:12px 16px;border-radius:16px;font-weight:900}.secondary{background:#eff6ff;color:#075985;padding:12px 16px;border-radius:16px;font-weight:900}
+    .priceBox{background:#f8fafc;border:1px solid #e2e8f0;border-radius:24px;padding:16px;margin:10px 0 0}.priceBox strong{display:block;font-size:30px;color:#075985}.priceBox span{font-weight:900;color:#64748b}
+    .alert{border-radius:18px;padding:14px;font-weight:900;margin-top:12px}.alert.red{background:#fff1f2;color:#be123c}.alert.green{background:#ecfdf5;color:#047857}.alert.gold{background:#fffbeb;color:#b45309}
+    .ticketPaper{background:#fff;color:#0f172a;border-radius:30px;padding:24px;box-shadow:inset 0 0 0 1px #e2e8f0}.ticketPaper .small{font-weight:900;color:#64748b}.ticketPaper .ticketNo{font-size:58px;font-weight:900;color:var(--blue);margin:8px 0 18px}.ticketPaper p{margin:10px 0;font-weight:800}.ticketPaper img{max-width:100%;border-radius:18px;border:1px solid #e2e8f0;margin-top:10px}
+    .whatsapp{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:18px;text-decoration:none;color:#fff;background:#10b981;border-radius:18px;padding:15px;font-weight:900}
+    .empty{border:1px dashed rgba(255,255,255,.22);background:rgba(255,255,255,.06);color:#cbd5e1;text-align:center;border-radius:26px;padding:32px;font-weight:800}.empty.light{background:#f8fafc;color:#94a3b8;border-color:#e2e8f0}
+    .adminTop{display:flex;justify-content:space-between;align-items:center;gap:14px;margin-bottom:16px}.actions{display:flex;gap:8px;flex-wrap:wrap}.search{position:relative;margin-bottom:16px}.search input{padding-right:46px}.sicon{position:absolute;right:16px;top:50%;transform:translateY(-50%);color:#94a3b8}
+    .table{border:1px solid #e2e8f0;border-radius:25px;overflow:hidden;background:#fff}.thead,.row{display:grid;grid-template-columns:.78fr 1.25fr .95fr 1.05fr .75fr .95fr .7fr .42fr;gap:10px;align-items:center;padding:14px}.thead{background:#f8fafc;color:#64748b;font-size:12px;font-weight:900}.row{border-top:1px solid #eef2f7;font-size:13px}.row small{display:block;color:#94a3b8;margin-top:4px;font-weight:700}.row .num{font-size:17px;color:var(--blue);font-weight:900}.row select{min-height:42px;padding:8px 10px;font-weight:800}.delete{width:40px;height:40px;border-radius:15px;background:#fff1f2;color:var(--danger);font-size:17px}
+    .doctorsGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}.doctorCard{background:#fff;border:1px solid #e2e8f0;border-radius:25px;padding:18px}.doctorCard h3{margin:0 0 12px;font-size:18px}.doctorMeta{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:12px}.pill{border-radius:999px;background:#f1f5f9;padding:8px 10px;font-size:12px;font-weight:900;color:#475569;text-align:center}.pill.green{background:#ecfdf5;color:#047857}.pill.red{background:#fff1f2;color:#be123c}
+    .footer{text-align:center;color:#64748b;font-size:13px;font-weight:800;margin:18px 0 0}
+    @media(max-width:980px){.hero,.grid{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}h1{font-size:45px}.form,.doctorsGrid{grid-template-columns:1fr}.card,.hero{border-radius:26px;padding:18px}.thead{display:none}.row{grid-template-columns:1fr;border:1px solid #eef2f7;border-radius:18px;margin:10px}.tabs{max-width:none}.wrap{padding:10px}}
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <header class="hero">
+    <div>
+      <div class="badge">🩺 تطبيق حجز تذاكر الدكتور</div>
+      <h1>أوسماس <span class="gold">OSMAS</span></h1>
+      <p class="subtitle">بواسطة مجموعة إرادة بلس — حجز مدفوع مع إشعار بنكك وحد يومي للتذاكر</p>
+    </div>
+    <div class="stats">
+      <div class="stat"><span>حجوزات اليوم</span><b id="stTotal">0</b></div>
+      <div class="stat"><span>في الانتظار</span><b id="stWait">0</b></div>
+      <div class="stat"><span>إجمالي اليوم</span><b id="stMoney">0</b></div>
+      <div class="stat"><span>أماكن متاحة</span><b id="stAvailable">0</b></div>
+    </div>
+  </header>
+
+  <nav class="tabs">
+    <button id="patientTab" class="active patient" onclick="showTab('patient')">حجز المريض</button>
+    <button id="adminTab" onclick="showTab('admin')">لوحة الاستقبال</button>
+    <button id="settingsTab" onclick="showTab('settings')">إعدادات الأطباء</button>
+  </nav>
+
+  <section id="patientPage" class="grid">
+    <div class="card">
+      <div class="sectionTitle">
+        <div class="icon">＋</div>
+        <div>
+          <h2>احجز تذكرتك الآن</h2>
+          <p>اختر الطبيب وارفق إشعار بنكك. بدون الإشعار لن يتم قبول الحجز.</p>
+        </div>
+      </div>
+
+      <form id="bookingForm" class="form">
+        <div><label>اسم المريض</label><input id="name" required placeholder="مثال: أحمد محمد"></div>
+        <div><label>رقم الجوال</label><input id="phone" required placeholder="05xxxxxxxx"></div>
+        <div><label>العمر</label><input id="age" placeholder="اختياري"></div>
+        <div>
+          <label>الدكتور</label>
+          <select id="doctor" required onchange="doctorChanged()"></select>
+          <div id="doctorHint" class="hint"></div>
+        </div>
+        <div><label>نوع الزيارة</label><select id="type"><option>كشف جديد</option><option>مراجعة</option><option>استشارة</option></select></div>
+        <div><label>الفترة</label><select id="period"><option>صباح</option><option>مساء</option></select></div>
+        <div><label>التاريخ</label><input id="date" type="date" onchange="doctorChanged()"></div>
+        <div>
+          <label>قيمة الحجز</label>
+          <input id="price" readonly>
+          <div class="hint">القيمة يتم جلبها تلقائيًا من إعدادات الطبيب.</div>
+        </div>
+        <div class="full">
+          <label>إرفاق صورة إشعار بنكك <span style="color:#e11d48">*</span></label>
+          <input id="receipt" type="file" accept="image/*" required>
+          <div class="hint">مطلوب صورة واضحة لإشعار التحويل. بدون الصورة لن يتم إنشاء التذكرة.</div>
+        </div>
+        <div class="full"><label>ملاحظات</label><textarea id="notes" placeholder="أي ملاحظة طبية أو إدارية مختصرة"></textarea></div>
+        <button id="bookBtn" class="mainBtn full" type="submit">تأكيد الحجز وإصدار التذكرة</button>
+        <div id="bookingAlert" class="full"></div>
+      </form>
+    </div>
+
+    <div class="card darkCard">
+      <div class="sectionTitle">
+        <div class="icon">🎫</div>
+        <div>
+          <h2>آخر تذكرة</h2>
+          <p>تظهر هنا بيانات آخر حجز تم إنشاؤه.</p>
+        </div>
+      </div>
+      <div id="lastTicket" class="empty">لم يتم إنشاء تذكرة جديدة بعد.</div>
+    </div>
+  </section>
+
+  <section id="adminPage" class="card" style="display:none">
+    <div class="adminTop">
+      <div><h2>لوحة الاستقبال</h2><p>إدارة الحجوزات، مراجعة إشعارات بنكك، وتغيير حالة المريض.</p></div>
+      <div class="actions">
+        <button class="secondary" onclick="exportCSV()">تصدير Excel</button>
+        <button class="danger" onclick="clearAll()">مسح كل الحجوزات</button>
+      </div>
+    </div>
+    <div class="search"><span class="sicon">🔍</span><input id="search" oninput="render()" placeholder="بحث بالاسم أو الجوال أو رقم التذكرة أو الدكتور"></div>
+    <div class="table">
+      <div class="thead"><span>التذكرة</span><span>المريض</span><span>الجوال</span><span>الدكتور</span><span>القيمة</span><span>الحالة</span><span>الإشعار</span><span></span></div>
+      <div id="rows"></div>
+    </div>
+  </section>
+
+  <section id="settingsPage" class="card" style="display:none">
+    <div class="adminTop">
+      <div><h2>إعدادات الأطباء</h2><p>حدد قيمة الحجز والعدد المسموح لكل طبيب في اليوم. مثال: الطبيب يفتح 15 تذكرة اليوم.</p></div>
+      <div class="actions"><button class="secondary" onclick="addDoctor()">إضافة طبيب</button><button class="secondary" onclick="resetDoctors()">استعادة الافتراضي</button></div>
+    </div>
+    <div id="doctorsGrid" class="doctorsGrid"></div>
+  </section>
+
+  <div class="footer">OSMAS — Powered by Erada Plus Group</div>
+</div>
+
+<script>
+const BOOKINGS_KEY = "osmas_bookings_v3";
+const DOCTORS_KEY = "osmas_doctors_v3";
+const today = new Date().toISOString().slice(0,10);
+const statuses = ["في الانتظار","دخل للدكتور","تم الكشف","ملغي"];
+
+let doctors = JSON.parse(localStorage.getItem(DOCTORS_KEY) || "null") || [
+  {id:1,name:"د. أحمد محمد",price:100,limit:15,active:true},
+  {id:2,name:"د. سارة علي",price:120,limit:15,active:true},
+  {id:3,name:"د. خالد حسن",price:150,limit:10,active:true}
+];
+let bookings = JSON.parse(localStorage.getItem(BOOKINGS_KEY) || "[]");
+
+document.getElementById("date").value = today;
+
+function save(){
+  localStorage.setItem(BOOKINGS_KEY, JSON.stringify(bookings));
+  localStorage.setItem(DOCTORS_KEY, JSON.stringify(doctors));
+}
+function val(id){ return document.getElementById(id).value.trim(); }
+function money(n){ return Number(n||0).toLocaleString("ar-SA") + " جنيه"; }
+function ticketNumber(){ return "A-" + String(bookings.length + 1).padStart(3,"0"); }
+function activeDoctors(){ return doctors.filter(d=>d.active !== false); }
+function countForDoctorDate(doctorName, date){ return bookings.filter(b=>b.doctor===doctorName && b.date===date && b.status!=="ملغي").length; }
+function getDoctorByName(name){ return doctors.find(d=>d.name===name); }
+function escapeHtml(str){ return String(str||"").replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m])); }
+
+function showTab(tab){
+  document.getElementById("patientPage").style.display = tab==="patient" ? "grid" : "none";
+  document.getElementById("adminPage").style.display = tab==="admin" ? "block" : "none";
+  document.getElementById("settingsPage").style.display = tab==="settings" ? "block" : "none";
+  document.getElementById("patientTab").className = tab==="patient" ? "active patient" : "";
+  document.getElementById("adminTab").className = tab==="admin" ? "active admin" : "";
+  document.getElementById("settingsTab").className = tab==="settings" ? "active settings" : "";
+  render();
+}
+
+function fillDoctorSelect(){
+  const sel = document.getElementById("doctor");
+  const current = sel.value;
+  sel.innerHTML = activeDoctors().map(d=>`<option value="${escapeHtml(d.name)}">${escapeHtml(d.name)}</option>`).join("");
+  if(current && activeDoctors().some(d=>d.name===current)) sel.value = current;
+  doctorChanged();
+}
+
+function doctorChanged(){
+  const d = getDoctorByName(val("doctor"));
+  const date = val("date") || today;
+  const alertBox = document.getElementById("bookingAlert");
+  const btn = document.getElementById("bookBtn");
+  if(!d){
+    document.getElementById("price").value = "";
+    document.getElementById("doctorHint").textContent = "لا يوجد طبيب متاح.";
+    btn.disabled = true;
+    return;
+  }
+  const used = countForDoctorDate(d.name, date);
+  const remaining = Math.max(0, Number(d.limit || 0) - used);
+  document.getElementById("price").value = money(d.price);
+  document.getElementById("doctorHint").textContent = `المتاح لهذا اليوم: ${remaining} من ${d.limit} تذكرة`;
+  if(remaining <= 0){
+    btn.disabled = true;
+    alertBox.innerHTML = `<div class="alert red">اكتمل عدد التذاكر لهذا الطبيب في هذا اليوم. اختر طبيبًا آخر أو تاريخًا آخر.</div>`;
+  }else{
+    btn.disabled = false;
+    alertBox.innerHTML = `<div class="alert green">متاح الحجز. قيمة التذكرة: ${money(d.price)} — المتبقي: ${remaining}</div>`;
+  }
+}
+
+document.getElementById("bookingForm").addEventListener("submit", function(e){
+  e.preventDefault();
+  const d = getDoctorByName(val("doctor"));
+  const date = val("date") || today;
+  const receipt = document.getElementById("receipt").files[0];
+
+  if(!d){ alert("لا يوجد طبيب محدد"); return; }
+  if(!receipt){ alert("يجب إرفاق صورة إشعار بنكك قبل الحجز"); return; }
+  if(countForDoctorDate(d.name, date) >= Number(d.limit || 0)){
+    alert("اكتمل عدد التذاكر لهذا الطبيب في هذا اليوم");
+    doctorChanged();
+    return;
+  }
+
+  const reader = new FileReader();
+  reader.onload = function(){
+    const now = new Date();
+    const item = {
+      id: Date.now(),
+      ticket: ticketNumber(),
+      name: val("name"),
+      phone: val("phone"),
+      age: val("age"),
+      doctor: d.name,
+      price: Number(d.price || 0),
+      type: val("type"),
+      period: val("period"),
+      date: date,
+      notes: val("notes"),
+      status: "في الانتظار",
+      receiptName: receipt.name,
+      receiptImage: reader.result,
+      createdAt: String(now.getHours()).padStart(2,"0") + ":" + String(now.getMinutes()).padStart(2,"0")
+    };
+    bookings.unshift(item);
+    save();
+    document.getElementById("bookingForm").reset();
+    document.getElementById("date").value = today;
+    fillDoctorSelect();
+    showTicket(item);
+    render();
+    window.scrollTo({top:0,behavior:"smooth"});
+  };
+  reader.readAsDataURL(receipt);
+});
+
+function showTicket(t){
+  const msg = encodeURIComponent(`تم حجز تذكرتك في تطبيق أوسماس بواسطة مجموعة إرادة بلس
+رقم التذكرة: ${t.ticket}
+الاسم: ${t.name}
+الدكتور: ${t.doctor}
+قيمة الحجز: ${money(t.price)}
+التاريخ: ${t.date}
+الفترة: ${t.period}
+الحالة: ${t.status}
+تم إرفاق إشعار بنكك.`);
+  const box = document.getElementById("lastTicket");
+  box.className = "ticketPaper";
+  box.innerHTML = `
+    <div class="small">رقم التذكرة</div>
+    <div class="ticketNo">${t.ticket}</div>
+    <p>الاسم: ${escapeHtml(t.name)}</p>
+    <p>الدكتور: ${escapeHtml(t.doctor)}</p>
+    <p>قيمة الحجز: ${money(t.price)}</p>
+    <p>التاريخ: ${escapeHtml(t.date)} - ${escapeHtml(t.period)}</p>
+    <p>إشعار بنكك: مرفق ✅</p>
+    <a class="whatsapp" href="https://wa.me/?text=${msg}" target="_blank">💬 مشاركة على واتساب</a>
+    <button class="secondary" onclick="window.print()" style="margin-top:10px">طباعة التذكرة</button>
+  `;
+}
+
+function render(){
+  fillDoctorSelectOnce();
+  doctorChanged();
+  renderStats();
+  renderRows();
+  renderDoctors();
+}
+
+let doctorSelectReady = false;
+function fillDoctorSelectOnce(){
+  if(!doctorSelectReady){
+    fillDoctorSelect();
+    doctorSelectReady = true;
+  }
+}
+
+function renderStats(){
+  const todayItems = bookings.filter(b=>b.date===today);
+  const totalMoney = todayItems.filter(b=>b.status!=="ملغي").reduce((s,b)=>s+Number(b.price||0),0);
+  const available = activeDoctors().reduce((sum,d)=>sum+Math.max(0,Number(d.limit||0)-countForDoctorDate(d.name,today)),0);
+  document.getElementById("stTotal").textContent = todayItems.length;
+  document.getElementById("stWait").textContent = todayItems.filter(b=>b.status==="في الانتظار").length;
+  document.getElementById("stMoney").textContent = totalMoney.toLocaleString("ar-SA");
+  document.getElementById("stAvailable").textContent = available;
+}
+
+function renderRows(){
+  const rows = document.getElementById("rows");
+  if(!rows) return;
+  const search = (document.getElementById("search")?.value || "").toLowerCase();
+  const filtered = bookings.filter(b => (`${b.ticket} ${b.name} ${b.phone} ${b.doctor} ${b.status}`).toLowerCase().includes(search));
+  if(filtered.length===0){
+    rows.innerHTML = `<div class="empty light">لا توجد حجوزات.</div>`;
+    return;
+  }
+  rows.innerHTML = filtered.map(b=>`
+    <div class="row">
+      <span class="num">${b.ticket}</span>
+      <span><b>${escapeHtml(b.name)}</b><small>${escapeHtml(b.date)} - ${escapeHtml(b.period)} - ${escapeHtml(b.createdAt)}</small></span>
+      <span>${escapeHtml(b.phone)}</span>
+      <span>${escapeHtml(b.doctor)}</span>
+      <span><b>${money(b.price)}</b></span>
+      <select onchange="changeStatus(${b.id}, this.value)">
+        ${statuses.map(s=>`<option ${b.status===s?"selected":""}>${s}</option>`).join("")}
+      </select>
+      <button class="secondary" onclick="viewReceipt(${b.id})">عرض</button>
+      <button class="delete" onclick="deleteBooking(${b.id})">🗑</button>
+    </div>
+  `).join("");
+}
+
+function renderDoctors(){
+  const grid = document.getElementById("doctorsGrid");
+  if(!grid) return;
+  grid.innerHTML = doctors.map((d,i)=>{
+    const used = countForDoctorDate(d.name,today);
+    const remaining = Math.max(0, Number(d.limit||0)-used);
+    return `
+      <div class="doctorCard">
+        <h3>${escapeHtml(d.name)}</h3>
+        <label>اسم الطبيب</label>
+        <input value="${escapeHtml(d.name)}" onchange="updateDoctor(${i}, 'name', this.value)">
+        <label style="margin-top:10px">قيمة الحجز</label>
+        <input type="number" min="0" value="${Number(d.price||0)}" onchange="updateDoctor(${i}, 'price', this.value)">
+        <label style="margin-top:10px">عدد التذاكر المتاحة يوميًا</label>
+        <input type="number" min="0" value="${Number(d.limit||0)}" onchange="updateDoctor(${i}, 'limit', this.value)">
+        <div class="doctorMeta">
+          <div class="pill">المحجوز اليوم: ${used}</div>
+          <div class="pill ${remaining>0?'green':'red'}">المتبقي: ${remaining}</div>
+        </div>
+        <div class="actions" style="margin-top:12px">
+          <button class="secondary" onclick="toggleDoctor(${i})">${d.active===false?'تفعيل':'إيقاف'}</button>
+          <button class="danger" onclick="removeDoctor(${i})">حذف</button>
+        </div>
+      </div>
+    `;
+  }).join("");
+}
+
+function updateDoctor(i, key, value){
+  if(key==="price" || key==="limit") value = Number(value||0);
+  doctors[i][key] = value;
+  save();
+  doctorSelectReady = false;
+  render();
+}
+function toggleDoctor(i){ doctors[i].active = doctors[i].active===false ? true : false; save(); doctorSelectReady=false; render(); }
+function removeDoctor(i){ if(confirm("هل تريد حذف الطبيب؟")){ doctors.splice(i,1); save(); doctorSelectReady=false; render(); } }
+function addDoctor(){
+  const name = prompt("اكتب اسم الطبيب:");
+  if(!name) return;
+  doctors.push({id:Date.now(), name, price:100, limit:15, active:true});
+  save(); doctorSelectReady=false; render();
+}
+function resetDoctors(){
+  if(confirm("سيتم استعادة قائمة الأطباء الافتراضية. هل أنت متأكد؟")){
+    doctors = [
+      {id:1,name:"د. أحمد محمد",price:100,limit:15,active:true},
+      {id:2,name:"د. سارة علي",price:120,limit:15,active:true},
+      {id:3,name:"د. خالد حسن",price:150,limit:10,active:true}
+    ];
+    save(); doctorSelectReady=false; render();
+  }
+}
+
+function changeStatus(id,status){ bookings = bookings.map(b=>b.id===id?{...b,status}:b); save(); render(); }
+function deleteBooking(id){ if(confirm("هل تريد حذف هذا الحجز؟")){ bookings = bookings.filter(b=>b.id!==id); save(); render(); } }
+function clearAll(){ if(confirm("سيتم حذف كل الحجوزات من هذا الجهاز، هل أنت متأكد؟")){ bookings=[]; save(); render(); document.getElementById("lastTicket").className="empty"; document.getElementById("lastTicket").textContent="لم يتم إنشاء تذكرة جديدة بعد."; } }
+function viewReceipt(id){
+  const b = bookings.find(x=>x.id===id);
+  if(!b || !b.receiptImage){ alert("لا يوجد إشعار مرفق"); return; }
+  const w = window.open("");
+  w.document.write(`<html dir="rtl"><head><title>إشعار بنكك - ${b.ticket}</title><style>body{font-family:Tahoma;padding:20px;background:#f8fafc}img{max-width:100%;border-radius:20px;border:1px solid #ddd}.box{max-width:800px;margin:auto;background:#fff;padding:20px;border-radius:25px}</style></head><body><div class="box"><h2>إشعار بنكك للحجز ${b.ticket}</h2><p><b>المريض:</b> ${escapeHtml(b.name)}</p><p><b>الطبيب:</b> ${escapeHtml(b.doctor)}</p><p><b>القيمة:</b> ${money(b.price)}</p><img src="${b.receiptImage}"></div></body></html>`);
+}
+function exportCSV(){
+  const headers = ["رقم التذكرة","اسم المريض","الجوال","العمر","الدكتور","قيمة الحجز","نوع الزيارة","الفترة","التاريخ","الحالة","وقت الحجز","اسم ملف الإشعار","ملاحظات"];
+  const lines = [headers.join(",")].concat(bookings.map(b=>[
+    b.ticket,b.name,b.phone,b.age,b.doctor,b.price,b.type,b.period,b.date,b.status,b.createdAt,b.receiptName,b.notes
+  ].map(x=>`"${String(x||"").replace(/"/g,'""')}"`).join(",")));
+  const blob = new Blob(["\ufeff"+lines.join("\n")], {type:"text/csv;charset=utf-8;"});
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "osmas-bookings.csv";
+  a.click();
+}
+fillDoctorSelect();
+render();
+</script>
+</body>
+</html>
