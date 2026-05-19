@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>EROPLUS | ايروبلس</title>
+  <style>
+    :root{--navy:#071629;--blue:#0b84d8;--green:#10b981;--gold:#d6a84f;--muted:#64748b;--line:#e2e8f0;--danger:#e11d48;--orange:#f59e0b;--purple:#7c3aed}
+    *{box-sizing:border-box}body{margin:0;font-family:Tahoma,Arial,sans-serif;color:#0f172a;min-height:100vh;background:radial-gradient(circle at 10% 10%,rgba(14,165,233,.16),transparent 28%),radial-gradient(circle at 90% 20%,rgba(16,185,129,.13),transparent 25%),linear-gradient(135deg,#eef7ff,#fff 55%,#ecfdf5)}
+    .wrap{max-width:1240px;margin:auto;padding:16px}.hero{position:relative;overflow:hidden;background:linear-gradient(135deg,#071629,#0f2745 58%,#0b84d8);color:#fff;border-radius:34px;padding:30px;box-shadow:0 24px 70px rgba(7,22,41,.22);display:grid;grid-template-columns:1.05fr .95fr;gap:20px;align-items:center}
+    .hero:before{content:"";position:absolute;right:-100px;bottom:-140px;width:360px;height:360px;border-radius:50%;background:rgba(214,168,79,.18)}.hero>*{position:relative}.badge{display:inline-flex;padding:10px 15px;border-radius:999px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);font-weight:900}
+    h1{font-size:56px;margin:14px 0 8px;font-weight:900}.gold{color:var(--gold)}.subtitle{line-height:1.8;color:#dbeafe;font-weight:800;margin:0}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.stat{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.14);border-radius:24px;padding:14px;text-align:center}.stat span{display:block;color:#cbd5e1;font-size:12px;font-weight:800}.stat b{display:block;font-size:28px;margin-top:5px}
+    .contactBar{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0}.contactBar a{text-decoration:none;color:#fff;border-radius:18px;padding:14px;text-align:center;font-weight:900;box-shadow:0 12px 25px rgba(15,23,42,.12)}.wa{background:#10b981}.call{background:#0b84d8}
+    .tabs{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;background:#fff;border-radius:25px;padding:8px;margin:18px 0;box-shadow:0 14px 30px rgba(14,165,233,.12)}button,input,select,textarea{font-family:inherit}button{border:0;cursor:pointer}.tabs button{border-radius:18px;background:transparent;color:#64748b;font-weight:900;padding:13px 8px;font-size:13px}.tabs button.active{color:#fff}.patient{background:var(--blue)!important}.doctor{background:var(--green)!important}.pharmacy{background:var(--purple)!important}.staff{background:var(--navy)!important}.driver{background:var(--orange)!important}.settings{background:#334155!important}
+    .services{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px}.service{background:#fff;border:1px solid #e2e8f0;border-radius:24px;padding:16px;font-weight:900;text-align:center;box-shadow:0 10px 25px rgba(14,165,233,.08)}.service.active{background:#eff6ff;border-color:#38bdf8;color:#075985}
+    .grid{display:grid;grid-template-columns:1.05fr .95fr;gap:18px}.card{background:rgba(255,255,255,.94);border:1px solid rgba(226,232,240,.78);border-radius:34px;padding:24px;box-shadow:0 22px 60px rgba(14,165,233,.12)}.darkCard{background:linear-gradient(135deg,#071629,#12243b);color:#fff}
+    .sectionTitle{display:flex;align-items:center;gap:14px;margin-bottom:20px}.icon{width:54px;height:54px;border-radius:19px;display:flex;align-items:center;justify-content:center;background:#e0f2fe;color:#0b84d8;font-size:25px}.darkCard .icon{background:rgba(255,255,255,.1);color:var(--gold)}h2{margin:0;font-size:24px;font-weight:900}.sectionTitle p,.adminTop p{margin:5px 0 0;color:#64748b;font-size:14px;font-weight:700}.darkCard .sectionTitle p{color:#cbd5e1}
+    .form{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}label{display:block;font-size:14px;font-weight:900;margin-bottom:8px;color:#334155}.hint{font-size:12px;color:#64748b;font-weight:800;margin-top:7px;line-height:1.7}input,select,textarea{width:100%;border:1px solid var(--line);background:#f8fafc;border-radius:18px;padding:13px;min-height:49px;outline:none;font-size:14px}input:focus,select:focus,textarea:focus{border-color:#38bdf8;background:#fff;box-shadow:0 0 0 4px rgba(56,189,248,.13)}textarea{min-height:94px;resize:vertical}.full{grid-column:1/-1}
+    .mainBtn{min-height:55px;border-radius:18px;background:linear-gradient(135deg,#0b84d8,#075985);color:#fff;font-size:15px;font-weight:900;box-shadow:0 16px 28px rgba(14,132,216,.2)}.mainBtn:disabled{background:#94a3b8;cursor:not-allowed}.secondary{background:#eff6ff;color:#075985;padding:11px 14px;border-radius:16px;font-weight:900}.danger{background:#fff1f2;color:var(--danger);padding:11px 14px;border-radius:16px;font-weight:900}.ok{background:#ecfdf5;color:#047857;padding:11px 14px;border-radius:16px;font-weight:900}.warn{background:#fffbeb;color:#b45309;padding:11px 14px;border-radius:16px;font-weight:900}
+    .alert{border-radius:18px;padding:13px;font-weight:900;margin-top:10px;line-height:1.7}.alert.red{background:#fff1f2;color:#be123c}.alert.green{background:#ecfdf5;color:#047857}.alert.gold{background:#fffbeb;color:#b45309}.alert.blue{background:#eff6ff;color:#075985}
+    .paper{background:#fff;color:#0f172a;border-radius:30px;padding:22px;box-shadow:inset 0 0 0 1px #e2e8f0}.paper .code{font-size:44px;font-weight:900;color:#0b84d8;margin:8px 0 16px}.paper p{font-weight:800}.empty{border:1px dashed rgba(255,255,255,.22);background:rgba(255,255,255,.06);color:#cbd5e1;text-align:center;border-radius:26px;padding:30px;font-weight:800}.empty.light{background:#f8fafc;color:#94a3b8;border-color:#e2e8f0}
+    .adminTop{display:flex;justify-content:space-between;align-items:center;gap:14px;margin-bottom:16px}.actions{display:flex;gap:8px;flex-wrap:wrap}.search{position:relative;margin-bottom:14px}.search input{padding-right:46px}.sicon{position:absolute;right:16px;top:50%;transform:translateY(-50%);color:#94a3b8}
+    .table{border:1px solid #e2e8f0;border-radius:25px;overflow:hidden;background:#fff}.thead,.row{display:grid;grid-template-columns:.72fr 1.15fr .95fr 1.05fr .82fr 1.1fr .85fr .6fr;gap:9px;align-items:center;padding:13px}.thead{background:#f8fafc;color:#64748b;font-size:12px;font-weight:900}.row{border-top:1px solid #eef2f7;font-size:13px}.row small{display:block;color:#94a3b8;margin-top:4px;font-weight:700}.row .num{font-size:16px;color:#0b84d8;font-weight:900}.row select{min-height:40px;padding:7px 9px;font-weight:800}
+    .mini{background:#fff;border:1px solid #e2e8f0;border-radius:25px;padding:16px;margin-bottom:12px}.boards{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}.pill{display:inline-flex;border-radius:999px;background:#f1f5f9;padding:7px 10px;font-size:12px;font-weight:900;color:#475569;margin:2px}.pill.green{background:#ecfdf5;color:#047857}.pill.red{background:#fff1f2;color:#be123c}.pill.gold{background:#fffbeb;color:#b45309}.pill.blue{background:#eff6ff;color:#075985}.footer{text-align:center;color:#64748b;font-size:13px;font-weight:800;margin:18px 0 0}
+    @media(max-width:1030px){.hero,.grid{grid-template-columns:1fr}.stats,.services,.contactBar{grid-template-columns:repeat(2,1fr)}.tabs{grid-template-columns:repeat(3,1fr)}h1{font-size:42px}.form,.boards{grid-template-columns:1fr}.card,.hero{border-radius:26px;padding:18px}.thead{display:none}.row{grid-template-columns:1fr;border:1px solid #eef2f7;border-radius:18px;margin:10px}.wrap{padding:10px}}
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <header class="hero">
+    <div>
+      <div class="badge">🏥 خدمات طبية سهلة</div>
+      <h1>EROPLUS <span class="gold">ايروبلس</span></h1>
+      <p class="subtitle">خدمات طبية سهلة - حجز طبيب - تحدث مع طبيب - طلب توصيل أدوية - طلب أخذ عينات فحص من المنزل</p>
+    </div>
+    <div class="stats">
+      <div class="stat"><span>كل الطلبات</span><b id="stTotal">0</b></div>
+      <div class="stat"><span>تنتظر دفع</span><b id="stPay">0</b></div>
+      <div class="stat"><span>للتوصيل</span><b id="stDelivery">0</b></div>
+      <div class="stat"><span>تم التوصيل</span><b id="stDone">0</b></div>
+    </div>
+  </header>
+
+  <div class="contactBar">
+    <a class="wa" href="https://wa.me/249962648214" target="_blank">💬 تواصل معنا واتساب عند عدم تمكنك من الحجز</a>
+    <a class="call" href="tel:+249962648214">📞 اتصال مباشر: +249962648214</a>
+  </div>
+
+  <nav class="tabs">
+    <button id="patientTab" class="active patient" onclick="showTab('patient')">واجهة المريض</button>
+    <button id="doctorTab" onclick="showTab('doctor')">بورد الطبيب</button>
+    <button id="pharmacyTab" onclick="showTab('pharmacy')">بورد الصيدلي</button>
+    <button id="staffTab" onclick="showTab('staff')">بورد الموظف</button>
+    <button id="driverTab" onclick="showTab('driver')">بورد السائق</button>
+    <button id="settingsTab" onclick="showTab('settings')">الإعدادات</button>
+  </nav>
+
+  <section id="patientPage">
+    <div class="services">
+      <button class="service active" id="svcDoctor" onclick="selectService('doctor')">🩺 حجز طبيب</button>
+      <button class="service" id="svcConsult" onclick="selectService('consult')">💬 تحدث مع طبيب</button>
+      <button class="service" id="svcMedicine" onclick="selectService('medicine')">💊 توصيل أدوية</button>
+      <button class="service" id="svcLab" onclick="selectService('lab')">🧪 أخذ عينات من المنزل</button>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <div class="sectionTitle"><div class="icon" id="serviceIcon">🩺</div><div><h2 id="serviceTitle">حجز طبيب</h2><p id="serviceDesc">اختر الطبيب وارفق إشعار بنكك.</p></div></div>
+        <form id="requestForm" class="form">
+          <div><label>اسم المريض</label><input id="name" required placeholder="مثال: أحمد محمد"></div>
+          <div><label>رقم التواصل</label><input id="phone" required placeholder="05xxxxxxxx"></div>
+          <div><label>العنوان / الحي</label><input id="address" placeholder="مثال: الحي والشارع"></div>
+          <div id="complexBox"><label>المجمع الطبي</label><select id="complex" onchange="complexChanged()"></select><div class="hint">اختر المجمع ليظهر أطباؤه فقط.</div></div>
+          <div id="doctorBox"><label>الدكتور</label><select id="doctor" onchange="doctorChanged()"></select><div id="doctorHint" class="hint"></div></div>
+          <div id="dateBox"><label>التاريخ</label><input id="date" type="date" onchange="doctorChanged()"></div>
+          <div id="periodBox"><label>الفترة</label><select id="period"><option>صباح</option><option>مساء</option></select></div>
+          <div id="priceBox"><label>قيمة الحجز</label><input id="price" readonly></div>
+          <div id="receiptBox"><label>إرفاق إشعار بنكك</label><input id="receipt" type="file" accept="image/*"><div class="hint">إجباري لحجز الطبيب، ولطلب الدواء بعد تسعير الصيدلي.</div></div>
+          <div id="prescriptionBox" class="full" style="display:none"><label>إرفاق الروشتة الطبية</label><input id="prescription" type="file" accept="image/*,.pdf"><div class="hint">الصيدلي يراجع الروشتة ويحدد السعر، ثم ترفع إشعار بنكك من قسم متابعة طلباتي.</div></div>
+          <div class="full"><label>ملاحظات الطلب</label><textarea id="notes" placeholder="اكتب أي تفاصيل مهمة"></textarea></div>
+          <button id="submitBtn" class="mainBtn full" type="submit">إرسال الطلب</button>
+          <div id="requestAlert" class="full"></div>
+        </form>
+      </div>
+
+      <div class="card darkCard">
+        <div class="sectionTitle"><div class="icon">📋</div><div><h2>آخر طلب</h2><p>تظهر هنا بيانات آخر طلب.</p></div></div>
+        <div id="lastTicket" class="empty">لم يتم إنشاء طلب جديد بعد.</div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:18px">
+      <div class="adminTop"><div><h2>متابعة طلباتي</h2><p>اكتب رقم الجوال لعرض طلباتك. إذا قام الصيدلي بتحديد السعر، ارفع إشعار بنكك هنا لينتقل الطلب للسائق.</p></div></div>
+      <div class="search"><span class="sicon">🔍</span><input id="patientSearch" oninput="renderPatientFollowup()" placeholder="اكتب رقم جوالك لمتابعة الطلب"></div>
+      <div id="patientFollowup"></div>
+    </div>
+  </section>
+
+  <section id="doctorPage" class="card" style="display:none"><div class="adminTop"><div><h2>بورد الطبيب</h2><p>حجوزات الطبيب وطلبات التحدث مع طبيب.</p></div></div><div class="table"><div class="thead"><span>الرقم</span><span>المريض</span><span>الجوال</span><span>الخدمة</span><span>القيمة</span><span>الحالة</span><span>مرفق</span><span>إجراء</span></div><div id="doctorRows"></div></div></section>
+  <section id="pharmacyPage" class="card" style="display:none"><div class="adminTop"><div><h2>بورد الصيدلي</h2><p>راجع الروشتة، حدد السعر، ثم بعد دفع المريض يظهر الطلب جاهزًا للتوصيل.</p></div></div><div class="table"><div class="thead"><span>الرقم</span><span>المريض</span><span>الجوال</span><span>الخدمة</span><span>السعر</span><span>الحالة</span><span>الروشتة</span><span>إجراء</span></div><div id="pharmacyRows"></div></div></section>
+  <section id="staffPage" class="card" style="display:none"><div class="adminTop"><div><h2>بورد موظف التطبيق</h2><p>متابعة كل الطلبات وتحويل المدفوع للسائق.</p></div><div class="actions"><button class="secondary" onclick="exportCSV()">تصدير</button><button class="danger" onclick="clearAll()">مسح الكل</button></div></div><div class="table"><div class="thead"><span>الرقم</span><span>المريض</span><span>الجوال</span><span>الخدمة</span><span>القيمة</span><span>الحالة</span><span>مرفق</span><span>إجراء</span></div><div id="staffRows"></div></div></section>
+  <section id="driverPage" class="card" style="display:none"><div class="adminTop"><div><h2>بورد السائق</h2><p>طلبات التوصيل تظهر بعد رفع إشعار بنكك أو تحويلها من الموظف.</p></div></div><div class="table"><div class="thead"><span>الرقم</span><span>العميل</span><span>الجوال</span><span>المصدر</span><span>القيمة</span><span>الحالة</span><span>العنوان</span><span>إجراء</span></div><div id="driverRows"></div></div></section>
+  <section id="settingsPage" class="card" style="display:none"><div class="adminTop"><div><h2>الإعدادات</h2><p>تعديل المجمعات الطبية، وربط الأطباء بكل مجمع، والأسعار وعدد التذاكر اليومية.</p></div><div class="actions"><button class="secondary" onclick="addComplex()">إضافة مجمع</button><button class="secondary" onclick="addDoctor()">إضافة طبيب</button></div></div><div id="complexesGrid" class="boards"></div><hr style="border:0;border-top:1px solid #e2e8f0;margin:18px 0"><div id="doctorsGrid" class="boards"></div></section>
+
+  <div class="footer">EROPLUS — Easy Medical Services</div>
+</div>
+
+<script>
+const REQUESTS_KEY="eroplus_requests_v5", DOCTORS_KEY="eroplus_doctors_v5", COMPLEXES_KEY="eroplus_complexes_v5";
+const today=new Date().toISOString().slice(0,10);
+const serviceLabels={doctor:"حجز طبيب",consult:"تحدث مع طبيب",medicine:"توصيل أدوية",lab:"أخذ عينات من المنزل"};
+const statuses=["جديد","قيد المراجعة","تم التسعير - بانتظار إشعار بنكك","تم رفع إشعار بنكك","جاهز للتوصيل","مرسل للسائق","قبله السائق","تم الاستلام من المصدر","تم التوصيل","ملغي"];
+let currentService="doctor";
+let requests=JSON.parse(localStorage.getItem(REQUESTS_KEY)||"[]");
+let complexes=JSON.parse(localStorage.getItem(COMPLEXES_KEY)||"null")||[
+  {id:1,name:"مجمع ايروبلس الطبي"},
+  {id:2,name:"مجمع المدينة الطبي"},
+  {id:3,name:"مجمع النور الطبي"}
+];
+let doctors=JSON.parse(localStorage.getItem(DOCTORS_KEY)||"null")||[
+  {id:1,complex:"مجمع ايروبلس الطبي",name:"د. أحمد محمد",price:100,limit:15,active:true},
+  {id:2,complex:"مجمع ايروبلس الطبي",name:"د. سارة علي",price:120,limit:15,active:true},
+  {id:3,complex:"مجمع المدينة الطبي",name:"د. خالد حسن",price:150,limit:10,active:true},
+  {id:4,complex:"مجمع النور الطبي",name:"د. منى عبدالله",price:130,limit:12,active:true}
+];
+document.getElementById("date").value=today;
+function save(){localStorage.setItem(REQUESTS_KEY,JSON.stringify(requests));localStorage.setItem(DOCTORS_KEY,JSON.stringify(doctors));localStorage.setItem(COMPLEXES_KEY,JSON.stringify(complexes))}
+function val(id){return document.getElementById(id)?.value?.trim()||""}
+function money(n){return Number(n||0).toLocaleString("ar-SA")+" جنيه"}
+function code(){return "ER-"+String(requests.length+1).padStart(4,"0")}
+function activeDoctors(){let c=val("complex");return doctors.filter(d=>d.active!==false && (!c || d.complex===c))}
+function allActiveDoctors(){return doctors.filter(d=>d.active!==false)}
+function getDoctor(name){return doctors.find(d=>d.name===name)}
+function countDoctor(name,date){return requests.filter(r=>r.service==="doctor"&&r.doctor===name&&r.date===date&&r.status!=="ملغي").length}
+function esc(s){return String(s||"").replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
+function showTab(tab){["patient","doctor","pharmacy","staff","driver","settings"].forEach(t=>{document.getElementById(t+"Page").style.display=t===tab?"block":"none";document.getElementById(t+"Tab").className=t===tab?"active "+t:""});render()}
+function selectService(s){currentService=s;["Doctor","Consult","Medicine","Lab"].forEach(x=>document.getElementById("svc"+x).classList.remove("active"));document.getElementById("svc"+({doctor:"Doctor",consult:"Consult",medicine:"Medicine",lab:"Lab"}[s])).classList.add("active");document.getElementById("serviceIcon").textContent={doctor:"🩺",consult:"💬",medicine:"💊",lab:"🧪"}[s];document.getElementById("serviceTitle").textContent=serviceLabels[s];let doctor=s==="doctor",med=s==="medicine",lab=s==="lab";document.getElementById("complexBox").style.display=doctor?"block":"none";document.getElementById("doctorBox").style.display=doctor?"block":"none";document.getElementById("dateBox").style.display=(doctor||lab)?"block":"none";document.getElementById("periodBox").style.display=(doctor||lab)?"block":"none";document.getElementById("priceBox").style.display=doctor?"block":"none";document.getElementById("receiptBox").style.display=doctor?"block":"none";document.getElementById("prescriptionBox").style.display=med?"block":"none";document.getElementById("receipt").required=doctor;document.getElementById("prescription").required=med;document.getElementById("serviceDesc").textContent=doctor?"اختر الطبيب وارفق إشعار بنكك.":s==="consult"?"اترك رقم التواصل وسيقوم الطبيب بمحادثتك لاحقًا.":med?"ارفق الروشتة، الصيدلي يحدد السعر، ثم ارفع إشعار بنكك من متابعة طلباتي.":"اطلب أخذ عينة من المنزل، وسيتم تحويل الطلب للسائق.";doctorChanged()}
+function fillComplexes(){
+  let sel=document.getElementById("complex");
+  if(!sel) return;
+  let cur=sel.value;
+  sel.innerHTML=complexes.map(c=>`<option>${esc(c.name)}</option>`).join("");
+  if(cur && complexes.some(c=>c.name===cur)) sel.value=cur;
+}
+function fillDoctors(){
+  fillComplexes();
+  let sel=document.getElementById("doctor"),cur=sel.value;
+  let list=activeDoctors();
+  sel.innerHTML=list.map(d=>`<option>${esc(d.name)}</option>`).join("");
+  if(cur&&list.some(d=>d.name===cur)) sel.value=cur;
+}
+function complexChanged(){
+  let sel=document.getElementById("doctor");
+  sel.value="";
+  fillDoctors();
+  doctorChanged();
+}
+function doctorChanged(){fillDoctors();let btn=document.getElementById("submitBtn"),alert=document.getElementById("requestAlert");if(currentService!=="doctor"){btn.disabled=false;alert.innerHTML=currentService==="medicine"?`<div class="alert gold">بعد إرسال الروشتة سيحدد الصيدلي السعر، ثم يظهر الطلب في متابعة طلباتي لرفع إشعار بنكك.</div>`:"";return}let d=getDoctor(val("doctor"));if(!d){btn.disabled=true;return}let rem=Math.max(0,Number(d.limit)-countDoctor(d.name,val("date")||today));document.getElementById("price").value=money(d.price);document.getElementById("doctorHint").textContent=`المتاح: ${rem} من ${d.limit}`;btn.disabled=rem<=0;alert.innerHTML=rem<=0?`<div class="alert red">اكتمل عدد التذاكر لهذا الطبيب.</div>`:`<div class="alert green">متاح الحجز. القيمة: ${money(d.price)}</div>`}
+function readFile(file,cb){let r=new FileReader();r.onload=()=>cb(r.result);r.readAsDataURL(file)}
+document.getElementById("requestForm").addEventListener("submit",e=>{e.preventDefault();let receipt=document.getElementById("receipt").files[0],pres=document.getElementById("prescription").files[0],d=getDoctor(val("doctor")),base={id:Date.now(),code:code(),service:currentService,name:val("name"),phone:val("phone"),address:val("address"),complex:currentService==="doctor"?val("complex"):"",doctor:"",price:0,date:val("date")||today,period:val("period"),notes:val("notes"),status:"جديد",createdAt:new Date().toLocaleTimeString("ar-SA",{hour:"2-digit",minute:"2-digit"}),source:currentService==="medicine"?"الصيدلية":currentService==="lab"?"المعمل":""};if(currentService==="doctor"){if(!receipt){alert("إشعار بنكك إجباري");return}if(countDoctor(d.name,base.date)>=d.limit){alert("اكتمل عدد التذاكر");return}base.doctor=d.name;base.price=Number(d.price);base.status="تم رفع إشعار بنكك";readFile(receipt,data=>{base.receiptImage=data;base.receiptName=receipt.name;finish(base)})}else if(currentService==="medicine"){if(!pres){alert("إرفاق الروشتة إجباري");return}base.status="قيد المراجعة";readFile(pres,data=>{base.prescriptionImage=data;base.prescriptionName=pres.name;finish(base)})}else{base.status="جديد";finish(base)}})
+function finish(item){requests.unshift(item);save();document.getElementById("requestForm").reset();document.getElementById("date").value=today;showLast(item);selectService(currentService);render()}
+function showLast(t){document.getElementById("lastTicket").className="paper";document.getElementById("lastTicket").innerHTML=`<div>رقم الطلب</div><div class="code">${t.code}</div><p>الخدمة: ${serviceLabels[t.service]}</p>${t.complex?`<p>المجمع: ${esc(t.complex)}</p>`:""}<p>الاسم: ${esc(t.name)}</p><p>الجوال: ${esc(t.phone)}</p><p>الحالة: ${esc(t.status)}</p>`}
+function render(){fillDoctors();doctorChanged();stats();rows("doctorRows",r=>["doctor","consult"].includes(r.service));rows("pharmacyRows",r=>r.service==="medicine");rows("staffRows",r=>true);driverRows();renderComplexes();renderDoctors();renderPatientFollowup()}
+function stats(){document.getElementById("stTotal").textContent=requests.length;document.getElementById("stPay").textContent=requests.filter(r=>r.status==="تم التسعير - بانتظار إشعار بنكك").length;document.getElementById("stDelivery").textContent=requests.filter(r=>["جاهز للتوصيل","مرسل للسائق","قبله السائق","تم الاستلام من المصدر"].includes(r.status)).length;document.getElementById("stDone").textContent=requests.filter(r=>r.status==="تم التوصيل").length}
+function rows(id,filter){let el=document.getElementById(id);if(!el)return;let list=requests.filter(filter);if(!list.length){el.innerHTML=`<div class="empty light">لا توجد طلبات.</div>`;return}el.innerHTML=list.map(r=>`<div class="row"><span class="num">${r.code}</span><span><b>${esc(r.name)}</b><small>${esc(r.date)} - ${esc(r.createdAt)}</small></span><span>${esc(r.phone)}</span><span>${serviceLabels[r.service]}${r.doctor?`<small>${esc(r.complex||"")} - ${esc(r.doctor)}</small>`:""}</span><span><b>${r.price?money(r.price):"بانتظار التسعير"}</b></span><select onchange="changeStatus(${r.id},this.value)">${statuses.map(s=>`<option ${r.status===s?"selected":""}>${s}</option>`).join("")}</select><button class="secondary" onclick="viewAttachment(${r.id})">عرض</button><button class="danger" onclick="del(${r.id})">حذف</button></div>${r.service==="medicine"?`<div style="padding:0 14px 14px;background:#fff"><button class="ok" onclick="setPrice(${r.id})">تحديد/تعديل السعر</button> <button class="warn" onclick="changeStatus(${r.id},'تم التسعير - بانتظار إشعار بنكك')">إرسال السعر للمريض</button> <button class="secondary" onclick="changeStatus(${r.id},'مرسل للسائق')">إرسال للسائق</button></div>`:""}${r.service==="lab"?`<div style="padding:0 14px 14px;background:#fff"><button class="secondary" onclick="changeStatus(${r.id},'مرسل للسائق')">إرسال للسائق</button></div>`:""}`).join("")}
+function driverRows(){let el=document.getElementById("driverRows");let list=requests.filter(r=>["medicine","lab"].includes(r.service)&&["جاهز للتوصيل","مرسل للسائق","قبله السائق","تم الاستلام من المصدر"].includes(r.status));if(!list.length){el.innerHTML=`<div class="empty light">لا توجد طلبات جاهزة للسائق.</div>`;return}el.innerHTML=list.map(r=>`<div class="row"><span class="num">${r.code}</span><span><b>${esc(r.name)}</b><small>${serviceLabels[r.service]}</small></span><span>${esc(r.phone)}</span><span>${r.service==="medicine"?"الصيدلية":"المعمل"}</span><span>${r.price?money(r.price):"-"}</span><select onchange="changeStatus(${r.id},this.value)">${statuses.map(s=>`<option ${r.status===s?"selected":""}>${s}</option>`).join("")}</select><span>${esc(r.address||"")}</span><button class="ok" onclick="changeStatus(${r.id},'قبله السائق')">قبول</button></div><div style="padding:0 14px 14px;background:#fff"><button class="warn" onclick="changeStatus(${r.id},'تم الاستلام من المصدر')">تم الاستلام</button> <button class="ok" onclick="changeStatus(${r.id},'تم التوصيل')">تم التوصيل</button></div>`).join("")}
+function renderPatientFollowup(){let el=document.getElementById("patientFollowup"),phone=val("patientSearch");if(!phone){el.innerHTML=`<div class="empty light">اكتب رقم جوالك لعرض الطلبات.</div>`;return}let list=requests.filter(r=>r.phone.includes(phone));if(!list.length){el.innerHTML=`<div class="empty light">لا توجد طلبات لهذا الرقم.</div>`;return}el.innerHTML=list.map(r=>`<div class="mini"><h3>${r.code} - ${serviceLabels[r.service]}</h3><p><b>الحالة:</b> ${esc(r.status)}</p><p><b>التكلفة:</b> ${r.price?money(r.price):"لم يتم التسعير بعد"}</p>${r.status==="تم التسعير - بانتظار إشعار بنكك"?`<label>ارفع إشعار بنكك للدفع</label><input type="file" accept="image/*" onchange="patientPay(${r.id},this.files[0])"><div class="hint">بعد رفع الإشعار ينتقل الطلب تلقائيًا إلى السائق للتوصيل.</div>`:""}</div>`).join("")}
+function patientPay(id,file){if(!file){alert("اختر صورة إشعار بنكك");return}readFile(file,data=>{requests=requests.map(r=>r.id===id?{...r,receiptImage:data,receiptName:file.name,status:"جاهز للتوصيل"}:r);save();render();alert("تم رفع إشعار بنكك، وسيتم تحويل الطلب للتوصيل.")})}
+function setPrice(id){let r=requests.find(x=>x.id===id),p=prompt("اكتب السعر:",r?.price||"");if(p===null)return;requests=requests.map(x=>x.id===id?{...x,price:Number(p||0),status:"تم التسعير - بانتظار إشعار بنكك"}:x);save();render()}
+function changeStatus(id,status){requests=requests.map(r=>r.id===id?{...r,status}:r);save();render()}
+function del(id){if(confirm("حذف الطلب؟")){requests=requests.filter(r=>r.id!==id);save();render()}}
+function clearAll(){if(confirm("مسح كل الطلبات؟")){requests=[];save();render()}}
+function viewAttachment(id){let r=requests.find(x=>x.id===id),img=r?.receiptImage||r?.prescriptionImage;if(!img){alert("لا يوجد مرفق");return}let w=window.open("");w.document.write(`<html dir="rtl"><body style="font-family:Tahoma;padding:20px;background:#f8fafc"><h2>مرفق الطلب ${r.code}</h2><p>${esc(r.name)} - ${serviceLabels[r.service]}</p>${img.startsWith("data:application/pdf")?`<embed src="${img}" width="100%" height="700">`:`<img src="${img}" style="max-width:100%;border-radius:20px">`}</body></html>`)}
+function renderComplexes(){
+  let g=document.getElementById("complexesGrid");
+  if(!g) return;
+  g.innerHTML=complexes.map((c,i)=>`<div class="mini"><h3>🏥 ${esc(c.name)}</h3>
+    <label>اسم المجمع الطبي</label>
+    <input value="${esc(c.name)}" onchange="updComplex(${i},this.value)">
+    <p><span class="pill blue">عدد الأطباء: ${doctors.filter(d=>d.complex===c.name).length}</span></p>
+    <button class="danger" onclick="rmComplex(${i})">حذف المجمع</button>
+  </div>`).join("");
+}
+function renderDoctors(){
+  let g=document.getElementById("doctorsGrid");if(!g)return;
+  g.innerHTML=doctors.map((d,i)=>`<div class="mini"><h3>${esc(d.name)}</h3>
+    <label>المجمع الطبي</label>
+    <select onchange="updDoc(${i},'complex',this.value)">${complexes.map(c=>`<option ${d.complex===c.name?"selected":""}>${esc(c.name)}</option>`).join("")}</select>
+    <label>اسم الطبيب</label><input value="${esc(d.name)}" onchange="updDoc(${i},'name',this.value)">
+    <label>قيمة الحجز</label><input type="number" value="${d.price}" onchange="updDoc(${i},'price',this.value)">
+    <label>عدد التذاكر اليومية</label><input type="number" value="${d.limit}" onchange="updDoc(${i},'limit',this.value)">
+    <p><span class="pill gold">${esc(d.complex||"بدون مجمع")}</span><span class="pill blue">محجوز اليوم: ${countDoctor(d.name,today)}</span></p>
+    <button class="secondary" onclick="toggleDoc(${i})">${d.active===false?"تفعيل":"إيقاف"}</button> <button class="danger" onclick="rmDoc(${i})">حذف</button>
+  </div>`).join("")
+}
+function updComplex(i,newName){
+  let old=complexes[i].name;
+  complexes[i].name=newName;
+  doctors=doctors.map(d=>d.complex===old?{...d,complex:newName}:d);
+  requests=requests.map(r=>r.complex===old?{...r,complex:newName}:r);
+  save();render();
+}
+function rmComplex(i){
+  if(!confirm("حذف المجمع؟ سيتم نقل أطبائه لأول مجمع آخر إن وجد."))return;
+  let old=complexes[i].name;
+  complexes.splice(i,1);
+  let fallback=complexes[0]?.name||"مجمع طبي جديد";
+  if(!complexes.length) complexes.push({id:Date.now(),name:fallback});
+  doctors=doctors.map(d=>d.complex===old?{...d,complex:fallback}:d);
+  save();render();
+}
+function addComplex(){let n=prompt("اسم المجمع الطبي");if(n){complexes.push({id:Date.now(),name:n});save();render()}}
+function updDoc(i,k,v){if(k==="price"||k==="limit")v=Number(v||0);doctors[i][k]=v;save();render()}
+function toggleDoc(i){doctors[i].active=doctors[i].active===false?true:false;save();render()}
+function rmDoc(i){if(confirm("حذف الطبيب؟")){doctors.splice(i,1);save();render()}}
+function addDoctor(){let n=prompt("اسم الطبيب");if(n){doctors.push({id:Date.now(),complex:complexes[0]?.name||"مجمع طبي جديد",name:n,price:100,limit:15,active:true});save();render()}}
+function exportCSV(){let headers=["رقم الطلب","الخدمة","الاسم","الجوال","العنوان","المجمع الطبي","الطبيب","القيمة","التاريخ","الحالة","ملاحظات"];let lines=[headers.join(",")].concat(requests.map(r=>[r.code,serviceLabels[r.service],r.name,r.phone,r.address,r.complex,r.doctor,r.price,r.date,r.status,r.notes].map(x=>`"${String(x||"").replace(/"/g,'""')}"`).join(",")));let blob=new Blob(["\ufeff"+lines.join("\n")],{type:"text/csv"}),a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="eroplus-requests.csv";a.click()}
+fillDoctors();selectService("doctor");render();
+</script>
+</body>
+</html>
